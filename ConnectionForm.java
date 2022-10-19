@@ -13,14 +13,11 @@ import javax.swing.JOptionPane;
 import za.co.nemesisnet.supreme.invention.model.Book;
 import za.co.nemesisnet.supreme.invention.model.Message;
 
-/**
- *
- * @author Peter Buckingham
- */
+
 public class ConnectionForm extends javax.swing.JFrame {
 
-    private String UserName;
-    private String UserPassword;
+    private String IPaddress;
+    private String Socket;
     private User user;
     public  GuiClientApp guiClientApp;
      ArrayList<Book> bookList = new ArrayList<>();
@@ -38,20 +35,20 @@ public class ConnectionForm extends javax.swing.JFrame {
     
     
 
-    public String getUserName() {
-        return UserName;
+    public String IPaddress() {
+        return IPaddress;
     }
 
-    public void setUserName(String UserName) {
-        this.UserName = UserName;
+    public void setIPaddress(String IPaddress) {
+        this.IPaddress = IPaddress;
     }
 
-    public String getUserPassword() {
-        return UserPassword;
+    public String getSocket() {
+        return UserSocket;
     }
 
-    public void setUserPassword(String UserPassword) {
-        this.UserPassword = UserPassword;
+    public void setUserSocket(String UserSocket) {
+        this.UserSocket = UserSocket;
     }
 
     /**
@@ -64,12 +61,12 @@ public class ConnectionForm extends javax.swing.JFrame {
     public ConnectionForm(User user,GuiClientApp guiClientApp) {
 
         initComponents();
-        setUserName(user.getUserName());
+        setIPaddress(user.getIPaddress());
         setUserPassword(user.getPassword());
         this.guiClientApp = guiClientApp;
         this.user = user;
 
-        jTextFieldIPAddress.setText(getUserName());
+        jTextFieldIPAddress.setText(getIPaddress());
         jTextFieldSocket.setText(getUserPassword());
     }
 
