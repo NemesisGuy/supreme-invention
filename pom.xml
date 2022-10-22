@@ -24,4 +24,11 @@
         <exec.mainClass>za.co.nemesisnet.supreme.invention.SupremeInvention</exec.mainClass>
     </properties>
     <name>supreme-invention-client</name>
+    <dependencies>
+         <dependency>
+            <groupId>commons-validator</groupId>
+            <artifactId>commons-validator</artifactId>
+            <version>1.7</version>
+        </dependency>
+    </dependencies>
 </project>
