@@ -39,15 +39,14 @@ public class LoanListDisplay extends javax.swing.JFrame {
      * @apiNote each item in the list is clickable and will display the book details. It is used to display the loan details, such as the book and user and due date. This method is intended to be used to display the loan details, such as the book and user and due date. This method displays the loan details, such as the book and user and due date. It is used to display the loan details, such as the book and user and due date.
      */
     public LoanListDisplay() {
-        setTitle("Client System" +" - " + "Bookshelf");
+        setTitle("Client System" +" - " + "Loan List");
         initComponents();
     }
 
-    public LoanListDisplay(User user, ArrayList<Book> bookList, GuiClientApp guiClientApp, ArrayList<Loan> loanList) {
+    public LoanListDisplay(GuiClientApp guiClientApp, ArrayList<Loan> loanList) {
         setTitle("Client System" +" - " + "Loan List" );
         initComponents();
-        this.bookList = bookList;
-        this.user = user;
+
         this.loanList = loanList;
         this.guiClientApp = guiClientApp;
           //get todays date
@@ -68,7 +67,7 @@ public class LoanListDisplay extends javax.swing.JFrame {
         //loop though list to populate table
         // this.userList = userList;
 
-        Object[] columnNames = {"Number : ", "Title : ", "Sub-Title : ", "Author : ", "Description : ", "Rating : " ,"DueDate : " , "Overdue : ","Curernt Penalty : " };
+        Object[] columnNames = {"Number : ", "StudentNumber : ", "Date Borrowed : ", "Date Returned : ", "Days Overdue : " ,"Current Penalty : " , "Overdue : "};
 
     //get todays date to compare to due date
         Dates dates = new Dates();
@@ -78,32 +77,46 @@ public class LoanListDisplay extends javax.swing.JFrame {
         //iterate through the loan list and sort by due date
         //totalPenaltyCost is calculated as follows: Every book on loan must be returned within 7 days. R0.50 penalty.
 
-        Object[][] loanData = new Object[loanList.size()][5];
+        Object[][] loanData = new Object[loanList.size()][7];
         for (int i = 0; i < loanList.size(); i++) {
             loanData[i][0] = loanList.get(i).getLoanNumber();
-            loanData[i][1] = loanList.get(i).getDueOnDate();
-            loanData[i][2] = loanList.get(i).isOverdue(dates.getDateObject(loanList.get(i).getDueOnDate()));//string
-            loanData[i][3] = loanList.get(i).getDaysOverdue();//int
-            loanData[i][4] = loanList.get(i).getCurrentPenaltyCost();
+            loanData[i][1] = loanList.get(i).getStudentNumber();
+            
+            loanData[i][2] = loanList.get(i).getDateBorrowed();
+            loanData[i][3] = loanList.get(i).getDateReturned();
+
+            loanData[i][4] = loanList.get(i).getDaysOverdue();//int
+
+            loanData[i][5] = loanList.get(i).getCurrentPenaltyCost();
+            //if days overdue is greater than 0 then display yes else display no
+            if (loanList.get(i).getDaysOverdue() > 0) {
+                loanData[i][6] = "Yes";
+            } else {
+                loanData[i][6] = "No";
+            }
+            
+
+            
+
         }
         unsortedLoanList = loanData;
         // sort the loan list by due date and store in sortedLoanList
-        sortedLoanList = sortLoanListByDueDate(unsortedLoanList);
+     //   sortedLoanList = sortLoanListByDueDate(unsortedLoanList);
+//
+//        Object[][] bookData = new Object[bookList.size()][6];
+//        for (int i = 0; i < bookList.size(); i++) {
+//
+//        //    data[i][0] = bookList.get(i).getBookId();
+//            // data[i][0] = i;
+//            bookData[i][1] = bookList.get(i).getTitle();
+//     //       bookData[i][2] = bookList.get(i).getSubTitle();
+//            bookData[i][3] = bookList.get(i).getAuthors();
+//     //       bookData[i][4] = bookList.get(i).getDescription();
+//     //       data[i][5] = bookList.get(i).getRating();
+//
+//        }
 
-        Object[][] bookData = new Object[bookList.size()][6];
-        for (int i = 0; i < bookList.size(); i++) {
-
-        //    data[i][0] = bookList.get(i).getBookId();
-            // data[i][0] = i;
-            bookData[i][1] = bookList.get(i).getTitle();
-            bookData[i][2] = bookList.get(i).getSubTitle();
-            bookData[i][3] = bookList.get(i).getAuthors();
-            bookData[i][4] = bookList.get(i).getDescription();
-     //       data[i][5] = bookList.get(i).getRating();
-
-        }
-
-        DefaultTableModel model = new DefaultTableModel(bookData, columnNames) {
+        DefaultTableModel model = new DefaultTableModel(loanData, columnNames) {
 
             @Override
             public boolean isCellEditable(int row, int column) {
@@ -124,13 +137,13 @@ public class LoanListDisplay extends javax.swing.JFrame {
         for  (int i = 0; i < loanList.size(); i++) {
            for (int j = 0; j < loanList.size(); j++) {
                //convert string dates to date objects for comparison
-                String dueDate1 = loanList.get(i).getDueOnDate();
-                String dueDate2 = loanList.get(j).getDueOnDate();
+   //             String dueDate1 = loanList.get(i).getDueOnDate();
+     //           String dueDate2 = loanList.get(j).getDueOnDate();
                 Date date1 = new Date();
                 Date date2 = new Date();
                 Dates datesTool = new Dates();
-                date1 = datesTool.getDateObject(dueDate1);
-                date2 = datesTool.getDateObject(dueDate2);
+   //             date1 = datesTool.getDateObject(dueDate1);
+ //               date2 = datesTool.getDateObject(dueDate2);
                 //(days late) 14 / 7(fine period ) = overdue 
           
                 //ovwerdue * 0.50 = penalty 
@@ -282,7 +295,7 @@ public class LoanListDisplay extends javax.swing.JFrame {
         jLabel3.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(0, 0, 0));
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel3.setText("Bookshelf :");
+        jLabel3.setText("Loan List :");
 
         javax.swing.GroupLayout jPanelTopLayout = new javax.swing.GroupLayout(jPanelTop);
         jPanelTop.setLayout(jPanelTopLayout);

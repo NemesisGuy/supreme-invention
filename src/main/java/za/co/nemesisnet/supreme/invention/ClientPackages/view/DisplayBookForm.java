@@ -9,7 +9,6 @@ package za.co.nemesisnet.supreme.invention.ClientPackages.view;
  * @author Peter Buckingham
  */
 import java.awt.Image;
-import java.awt.Insets;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -20,7 +19,6 @@ import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import za.co.nemesisnet.supreme.invention.model.Book;
-import za.co.nemesisnet.supreme.invention.model.Loan;
 import za.co.nemesisnet.supreme.invention.model.User;
 
 
@@ -55,11 +53,7 @@ public class DisplayBookForm extends javax.swing.JFrame {
         try {
             this.book = book;
             myBookTitle = book.getTitle();
-            subtTitle = book.getSubTitle();
-            author = book.getAuthors();
-            description = book.getDescription();
-            category = book.getCategory();
-            imageLink = book.getImageLink();
+           
             this.setVisible(true);
             initComponents();
             switch (displayBookButtons) {
@@ -80,15 +74,15 @@ public class DisplayBookForm extends javax.swing.JFrame {
             }
 
             jLabelTitle.setText(myBookTitle);
-            jLabelSubTitle.setText(subtTitle);
+   //         jLabelSubTitle.setText(subtTitle);
             jLabelAuthor.setText(author);
-            jTextAreaDescription.setText(description);
+    //        jTextAreaDescription.setText(description);
             jLabelCategory.setText(category);
 
             URL url = new URL(imageLink);
             Image image = ImageIO.read(url);
             ImageIcon imageIcon;
-            jLabelPicture.setIcon(imageIcon = new ImageIcon(image.getScaledInstance(jPanelImagePanel.getWidth(), jPanelImagePanel.getHeight(), Image.SCALE_SMOOTH)));
+      //      jLabelPicture.setIcon(imageIcon = new ImageIcon(image.getScaledInstance(jPanelImagePanel.getWidth(), jPanelImagePanel.getHeight(), Image.SCALE_SMOOTH)));
 
         } catch (MalformedURLException ex) {
             Logger.getLogger(DisplayBookForm.class.getName()).log(Level.SEVERE, null, ex);
@@ -102,11 +96,7 @@ public class DisplayBookForm extends javax.swing.JFrame {
             this.book = book;
             this.user = user;
             myBookTitle = book.getTitle();
-            subtTitle = book.getSubTitle();
-            author = book.getAuthors();
-            description = book.getDescription();
-            category = book.getCategory();
-            imageLink = book.getImageLink();
+           
 
             this.setVisible(true);
             initComponents();
@@ -134,15 +124,15 @@ public class DisplayBookForm extends javax.swing.JFrame {
 
             //jButtonLoan.setVisible(displayBookLoanButton);
             jLabelTitle.setText(myBookTitle);
-            jLabelSubTitle.setText(subtTitle);
+ //           jLabelSubTitle.setText(subtTitle);
             jLabelAuthor.setText(author);
-            jTextAreaDescription.setText(description);
+ //           jTextAreaDescription.setText(description);
             jLabelCategory.setText(category);
 
             URL url = new URL(imageLink);
             Image image = ImageIO.read(url);
             ImageIcon imageIcon;
-            jLabelPicture.setIcon(imageIcon = new ImageIcon(image.getScaledInstance(jPanelImagePanel.getWidth(), jPanelImagePanel.getHeight(), Image.SCALE_SMOOTH)));
+  //          jLabelPicture.setIcon(imageIcon = new ImageIcon(image.getScaledInstance(jPanelImagePanel.getWidth(), jPanelImagePanel.getHeight(), Image.SCALE_SMOOTH)));
 
         } catch (MalformedURLException ex) {
             Logger.getLogger(DisplayBookForm.class.getName()).log(Level.SEVERE, null, ex);
@@ -211,11 +201,6 @@ public class DisplayBookForm extends javax.swing.JFrame {
         jLabelTitle = new javax.swing.JLabel();
         jLabelAuthor = new javax.swing.JLabel();
         jLabelCategory = new javax.swing.JLabel();
-        jLabelSubTitle = new javax.swing.JLabel();
-        jPanelImagePanel = new javax.swing.JPanel();
-        jLabelPicture = new javax.swing.JLabel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jTextAreaDescription = new javax.swing.JTextArea();
         jPanelBottom = new javax.swing.JPanel();
         jButtonClose = new javax.swing.JButton();
         jButtonLoan = new javax.swing.JButton();
@@ -251,43 +236,6 @@ public class DisplayBookForm extends javax.swing.JFrame {
         jLabelCategory.setText("Category:");
         jLabelCategory.setToolTipText("Book Rating");
 
-        jLabelSubTitle.setFont(new java.awt.Font("Dialog", 2, 11)); // NOI18N
-        jLabelSubTitle.setForeground(new java.awt.Color(0, 0, 0));
-        jLabelSubTitle.setText("SubTitle: ");
-        jLabelSubTitle.setToolTipText("Book Sub Title ");
-
-        jPanelImagePanel.setMaximumSize(new java.awt.Dimension(150, 150));
-        jPanelImagePanel.setMinimumSize(new java.awt.Dimension(100, 150));
-        jPanelImagePanel.setPreferredSize(new java.awt.Dimension(198, 2));
-
-        jLabelPicture.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        jLabelPicture.setToolTipText("Book Cover");
-        jLabelPicture.setVerticalAlignment(javax.swing.SwingConstants.TOP);
-
-        javax.swing.GroupLayout jPanelImagePanelLayout = new javax.swing.GroupLayout(jPanelImagePanel);
-        jPanelImagePanel.setLayout(jPanelImagePanelLayout);
-        jPanelImagePanelLayout.setHorizontalGroup(
-            jPanelImagePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabelPicture, javax.swing.GroupLayout.DEFAULT_SIZE, 198, Short.MAX_VALUE)
-        );
-        jPanelImagePanelLayout.setVerticalGroup(
-            jPanelImagePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabelPicture, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        );
-
-        jScrollPane1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-
-        jTextAreaDescription.setEditable(false);
-        jTextAreaDescription.setColumns(20);
-        jTextAreaDescription.setLineWrap(true);
-        jTextAreaDescription.setRows(5);
-        jTextAreaDescription.setText("Description:");
-        jTextAreaDescription.setToolTipText("Book Description");
-        jTextAreaDescription.setWrapStyleWord(true);
-        jTextAreaDescription.setCursor(new java.awt.Cursor(java.awt.Cursor.N_RESIZE_CURSOR));
-        jTextAreaDescription.setMargin(new Insets(5,5,5,5));
-        jScrollPane1.setViewportView(jTextAreaDescription);
-
         javax.swing.GroupLayout jPanelMidLayout = new javax.swing.GroupLayout(jPanelMid);
         jPanelMid.setLayout(jPanelMidLayout);
         jPanelMidLayout.setHorizontalGroup(
@@ -296,30 +244,19 @@ public class DisplayBookForm extends javax.swing.JFrame {
                 .addGap(20, 20, 20)
                 .addGroup(jPanelMidLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabelTitle)
-                    .addComponent(jLabelSubTitle)
                     .addComponent(jLabelAuthor)
-                    .addComponent(jLabelCategory)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 347, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(20, 20, 20)
-                .addComponent(jPanelImagePanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(80, Short.MAX_VALUE))
+                    .addComponent(jLabelCategory))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanelMidLayout.setVerticalGroup(
             jPanelMidLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelMidLayout.createSequentialGroup()
                 .addGap(30, 30, 30)
-                .addGroup(jPanelMidLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jPanelImagePanel, javax.swing.GroupLayout.DEFAULT_SIZE, 227, Short.MAX_VALUE)
-                    .addGroup(jPanelMidLayout.createSequentialGroup()
-                        .addComponent(jLabelTitle)
-                        .addGap(18, 18, 18)
-                        .addComponent(jLabelSubTitle)
-                        .addGap(18, 18, 18)
-                        .addComponent(jLabelAuthor)
-                        .addGap(18, 18, 18)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(jLabelCategory)))
+                .addComponent(jLabelTitle)
+                .addGap(51, 51, 51)
+                .addComponent(jLabelAuthor)
+                .addGap(114, 114, 114)
+                .addComponent(jLabelCategory)
                 .addGap(20, 20, 20))
         );
 
@@ -360,13 +297,13 @@ public class DisplayBookForm extends javax.swing.JFrame {
         jPanelBottomLayout.setHorizontalGroup(
             jPanelBottomLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelBottomLayout.createSequentialGroup()
-                .addContainerGap(216, Short.MAX_VALUE)
+                .addContainerGap(135, Short.MAX_VALUE)
                 .addComponent(jButtonLoan)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 28, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jButtonReturn)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 26, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jButtonClose)
-                .addContainerGap(210, Short.MAX_VALUE))
+                .addContainerGap(129, Short.MAX_VALUE))
         );
         jPanelBottomLayout.setVerticalGroup(
             jPanelBottomLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -394,7 +331,7 @@ public class DisplayBookForm extends javax.swing.JFrame {
             .addGroup(jPanelTopLayout.createSequentialGroup()
                 .addGap(115, 115, 115)
                 .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 332, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(218, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanelTopLayout.setVerticalGroup(
             jPanelTopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -409,8 +346,8 @@ public class DisplayBookForm extends javax.swing.JFrame {
         jPanelMainLayout.setHorizontalGroup(
             jPanelMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanelBottom, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(jPanelMid, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(jPanelTop, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanelMid, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         jPanelMainLayout.setVerticalGroup(
             jPanelMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -452,15 +389,17 @@ public class DisplayBookForm extends javax.swing.JFrame {
 
     private void jButtonLoanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonLoanActionPerformed
         // TODO add your handling code here:
-        BookingForm bookingForm = new BookingForm(user, book);
-        bookingForm.setVisible(true);
-        bookingForm.setFont(getFont());
+        //public BookingForm(User user, Learner learner, Book book,GuiClientApp guiClientApp) {
+        
+      //  BookingForm bookingForm = new BookingForm(user, book,guiClientApp );
+     //   bookingForm.setVisible(true);
+     //   bookingForm.setFont(getFont());
     }//GEN-LAST:event_jButtonLoanActionPerformed
 
     private void jButtonReturnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonReturnActionPerformed
         // TODO add your handling code here:
         ///return books here
-        Loan loan = new Loan(user, book);
+//        Loan loan = new Loan(user, book);
      //   Read read = new Read();
   //      loan = read.readOutstandingUserLoanByBookId(user.getUserId(), book);
 
@@ -524,16 +463,11 @@ public class DisplayBookForm extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabelAuthor;
     private javax.swing.JLabel jLabelCategory;
-    private javax.swing.JLabel jLabelPicture;
-    private javax.swing.JLabel jLabelSubTitle;
     public static javax.swing.JLabel jLabelTitle;
     private javax.swing.JPanel jPanelBottom;
-    private static javax.swing.JPanel jPanelImagePanel;
     private javax.swing.JPanel jPanelMain;
     private javax.swing.JPanel jPanelMid;
     private javax.swing.JPanel jPanelTop;
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextArea jTextAreaDescription;
     // End of variables declaration//GEN-END:variables
 
     private Image displayFrameImageIcon() {

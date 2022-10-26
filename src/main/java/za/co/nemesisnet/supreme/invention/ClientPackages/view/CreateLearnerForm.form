@@ -81,19 +81,17 @@
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="jLabelTitle" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="jLabelISBN" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="jLabelStudentNumber" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="jLabelLastName" alignment="0" min="-2" max="-2" attributes="0"/>
                           <Component id="jLabelAuthor" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="jLabelRating" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="jLabelCategory" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="jLabelCanBorrow" alignment="0" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace min="-2" pref="50" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="jTextFieldAuthor" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="jTextFieldISBN" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="jTextFieldCategory" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="jTextFieldTitle" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="jCheckBoxAvalible" min="-2" max="-2" attributes="0"/>
+                          <Component id="jTextFieldFirstName" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="jTextFieldLastName" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="jTextFieldStudentNumber" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="jCheckBoxCanBorrow" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
                   </Group>
@@ -104,28 +102,23 @@
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="1" attributes="0">
-                          <Component id="jLabelTitle" alignment="1" min="-2" max="-2" attributes="0"/>
-                          <Component id="jTextFieldTitle" alignment="1" min="-2" max="-2" attributes="0"/>
+                          <Component id="jLabelStudentNumber" alignment="1" min="-2" max="-2" attributes="0"/>
+                          <Component id="jTextFieldStudentNumber" alignment="1" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="jLabelAuthor" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="jTextFieldAuthor" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jTextFieldFirstName" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="jLabelISBN" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="jTextFieldISBN" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jLabelLastName" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jTextFieldLastName" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="jTextFieldCategory" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="jLabelCategory" alignment="3" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="1" attributes="0">
-                          <Component id="jLabelRating" min="-2" max="-2" attributes="0"/>
-                          <Component id="jCheckBoxAvalible" min="-2" max="-2" attributes="0"/>
+                          <Component id="jLabelCanBorrow" min="-2" max="-2" attributes="0"/>
+                          <Component id="jCheckBoxCanBorrow" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
                   </Group>
@@ -133,12 +126,12 @@
             </DimensionLayout>
           </Layout>
           <SubComponents>
-            <Component class="javax.swing.JLabel" name="jLabelTitle">
+            <Component class="javax.swing.JLabel" name="jLabelStudentNumber">
               <Properties>
                 <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="0" green="0" red="0" type="rgb"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="Title:"/>
+                <Property name="text" type="java.lang.String" value="Student Number:"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="jLabelAuthor">
@@ -146,74 +139,59 @@
                 <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="0" green="0" red="0" type="rgb"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="Author:"/>
+                <Property name="text" type="java.lang.String" value="First Name : "/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JLabel" name="jLabelISBN">
+            <Component class="javax.swing.JLabel" name="jLabelLastName">
               <Properties>
                 <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="0" green="0" red="0" type="rgb"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="ISBN:"/>
+                <Property name="text" type="java.lang.String" value="Last Name : "/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JLabel" name="jLabelRating">
+            <Component class="javax.swing.JLabel" name="jLabelCanBorrow">
               <Properties>
                 <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="0" green="0" red="0" type="rgb"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="Avalible :"/>
-                <Property name="toolTipText" type="java.lang.String" value="Avalible for loan, tick for yes..."/>
+                <Property name="text" type="java.lang.String" value="Can Borrow :"/>
+                <Property name="toolTipText" type="java.lang.String" value="can loan, tick for yes..."/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JTextField" name="jTextFieldAuthor">
+            <Component class="javax.swing.JTextField" name="jTextFieldFirstName">
               <Properties>
                 <Property name="columns" type="int" value="40"/>
                 <Property name="toolTipText" type="java.lang.String" value="Enter author"/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jTextFieldAuthorActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jTextFieldFirstNameActionPerformed"/>
               </Events>
             </Component>
-            <Component class="javax.swing.JTextField" name="jTextFieldISBN">
+            <Component class="javax.swing.JTextField" name="jTextFieldLastName">
               <Properties>
                 <Property name="columns" type="int" value="40"/>
                 <Property name="toolTipText" type="java.lang.String" value="Enter ISBN code"/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jTextFieldISBNActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jTextFieldLastNameActionPerformed"/>
               </Events>
             </Component>
-            <Component class="javax.swing.JLabel" name="jLabelCategory">
-              <Properties>
-                <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                  <Color blue="0" green="0" red="0" type="rgb"/>
-                </Property>
-                <Property name="text" type="java.lang.String" value="Category : "/>
-                <Property name="toolTipText" type="java.lang.String" value="Category"/>
-              </Properties>
-            </Component>
-            <Component class="javax.swing.JTextField" name="jTextFieldCategory">
-              <Properties>
-                <Property name="columns" type="int" value="40"/>
-                <Property name="toolTipText" type="java.lang.String" value="Enter Category "/>
-              </Properties>
-              <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jTextFieldCategoryActionPerformed"/>
-              </Events>
-            </Component>
-            <Component class="javax.swing.JTextField" name="jTextFieldTitle">
+            <Component class="javax.swing.JTextField" name="jTextFieldStudentNumber">
               <Properties>
                 <Property name="columns" type="int" value="40"/>
                 <Property name="toolTipText" type="java.lang.String" value="Enter book title"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jTextFieldStudentNumberActionPerformed"/>
+              </Events>
             </Component>
-            <Component class="javax.swing.JCheckBox" name="jCheckBoxAvalible">
+            <Component class="javax.swing.JCheckBox" name="jCheckBoxCanBorrow">
               <Properties>
                 <Property name="toolTipText" type="java.lang.String" value="Avalible for loan, tick for yes..."/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jCheckBoxAvalibleActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jCheckBoxCanBorrowActionPerformed"/>
               </Events>
             </Component>
           </SubComponents>
@@ -315,7 +293,7 @@
                   <Color blue="0" green="0" red="0" type="rgb"/>
                 </Property>
                 <Property name="horizontalAlignment" type="int" value="0"/>
-                <Property name="text" type="java.lang.String" value="Create Book:"/>
+                <Property name="text" type="java.lang.String" value="Create Learner:"/>
               </Properties>
             </Component>
           </SubComponents>

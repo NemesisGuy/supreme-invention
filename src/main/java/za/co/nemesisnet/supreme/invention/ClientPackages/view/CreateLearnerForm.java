@@ -5,7 +5,9 @@
 package za.co.nemesisnet.supreme.invention.ClientPackages.view;
 
 import za.co.nemesisnet.supreme.invention.model.Book;
+import za.co.nemesisnet.supreme.invention.model.Learner;
 import za.co.nemesisnet.supreme.invention.model.Message;
+import za.co.nemesisnet.supreme.invention.model.User;
 
 import java.awt.Image;
 import javax.swing.JFrame;
@@ -25,7 +27,7 @@ public class CreateLearnerForm extends javax.swing.JFrame {
     GuiClientApp guiClientApp;
     public CreateLearnerForm(GuiClientApp guiClientApp) {
         setTitle("Ubiquitous System" + " - " + "Create a Book");
-        GuiClientApp guiClientApp1 = guiClientApp;
+         this.guiClientApp = guiClientApp;
         initComponents();
     }
 
@@ -43,16 +45,14 @@ public class CreateLearnerForm extends javax.swing.JFrame {
 
         jPanelMain = new javax.swing.JPanel();
         jPanelMid = new javax.swing.JPanel();
-        jLabelTitle = new javax.swing.JLabel();
+        jLabelStudentNumber = new javax.swing.JLabel();
         jLabelAuthor = new javax.swing.JLabel();
-        jLabelISBN = new javax.swing.JLabel();
-        jLabelRating = new javax.swing.JLabel();
-        jTextFieldAuthor = new javax.swing.JTextField();
-        jTextFieldISBN = new javax.swing.JTextField();
-        jLabelCategory = new javax.swing.JLabel();
-        jTextFieldCategory = new javax.swing.JTextField();
-        jTextFieldTitle = new javax.swing.JTextField();
-        jCheckBoxAvalible = new javax.swing.JCheckBox();
+        jLabelLastName = new javax.swing.JLabel();
+        jLabelCanBorrow = new javax.swing.JLabel();
+        jTextFieldFirstName = new javax.swing.JTextField();
+        jTextFieldLastName = new javax.swing.JTextField();
+        jTextFieldStudentNumber = new javax.swing.JTextField();
+        jCheckBoxCanBorrow = new javax.swing.JCheckBox();
         jPanelBottom = new javax.swing.JPanel();
         jButtonSubmit = new javax.swing.JButton();
         jButtonCancel = new javax.swing.JButton();
@@ -68,54 +68,47 @@ public class CreateLearnerForm extends javax.swing.JFrame {
         jPanelMid.setBackground(new java.awt.Color(192, 192, 192));
         jPanelMid.setForeground(new java.awt.Color(0, 0, 0));
 
-        jLabelTitle.setForeground(new java.awt.Color(0, 0, 0));
-        jLabelTitle.setText("Title:");
+        jLabelStudentNumber.setForeground(new java.awt.Color(0, 0, 0));
+        jLabelStudentNumber.setText("Student Number:");
 
         jLabelAuthor.setForeground(new java.awt.Color(0, 0, 0));
-        jLabelAuthor.setText("Author:");
+        jLabelAuthor.setText("First Name : ");
 
-        jLabelISBN.setForeground(new java.awt.Color(0, 0, 0));
-        jLabelISBN.setText("ISBN:");
+        jLabelLastName.setForeground(new java.awt.Color(0, 0, 0));
+        jLabelLastName.setText("Last Name : ");
 
-        jLabelRating.setForeground(new java.awt.Color(0, 0, 0));
-        jLabelRating.setText("Avalible :");
-        jLabelRating.setToolTipText("Avalible for loan, tick for yes...");
+        jLabelCanBorrow.setForeground(new java.awt.Color(0, 0, 0));
+        jLabelCanBorrow.setText("Can Borrow :");
+        jLabelCanBorrow.setToolTipText("can loan, tick for yes...");
 
-        jTextFieldAuthor.setColumns(40);
-        jTextFieldAuthor.setToolTipText("Enter author");
-        jTextFieldAuthor.addActionListener(new java.awt.event.ActionListener() {
+        jTextFieldFirstName.setColumns(40);
+        jTextFieldFirstName.setToolTipText("Enter author");
+        jTextFieldFirstName.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextFieldAuthorActionPerformed(evt);
+                jTextFieldFirstNameActionPerformed(evt);
             }
         });
 
-        jTextFieldISBN.setColumns(40);
-        jTextFieldISBN.setToolTipText("Enter ISBN code");
-        jTextFieldISBN.addActionListener(new java.awt.event.ActionListener() {
+        jTextFieldLastName.setColumns(40);
+        jTextFieldLastName.setToolTipText("Enter ISBN code");
+        jTextFieldLastName.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextFieldISBNActionPerformed(evt);
+                jTextFieldLastNameActionPerformed(evt);
             }
         });
 
-        jLabelCategory.setForeground(new java.awt.Color(0, 0, 0));
-        jLabelCategory.setText("Category : ");
-        jLabelCategory.setToolTipText("Category");
-
-        jTextFieldCategory.setColumns(40);
-        jTextFieldCategory.setToolTipText("Enter Category ");
-        jTextFieldCategory.addActionListener(new java.awt.event.ActionListener() {
+        jTextFieldStudentNumber.setColumns(40);
+        jTextFieldStudentNumber.setToolTipText("Enter book title");
+        jTextFieldStudentNumber.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextFieldCategoryActionPerformed(evt);
+                jTextFieldStudentNumberActionPerformed(evt);
             }
         });
 
-        jTextFieldTitle.setColumns(40);
-        jTextFieldTitle.setToolTipText("Enter book title");
-
-        jCheckBoxAvalible.setToolTipText("Avalible for loan, tick for yes...");
-        jCheckBoxAvalible.addActionListener(new java.awt.event.ActionListener() {
+        jCheckBoxCanBorrow.setToolTipText("Avalible for loan, tick for yes...");
+        jCheckBoxCanBorrow.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jCheckBoxAvalibleActionPerformed(evt);
+                jCheckBoxCanBorrowActionPerformed(evt);
             }
         });
 
@@ -126,18 +119,16 @@ public class CreateLearnerForm extends javax.swing.JFrame {
             .addGroup(jPanelMidLayout.createSequentialGroup()
                 .addGap(20, 20, 20)
                 .addGroup(jPanelMidLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabelTitle)
-                    .addComponent(jLabelISBN)
+                    .addComponent(jLabelStudentNumber)
+                    .addComponent(jLabelLastName)
                     .addComponent(jLabelAuthor)
-                    .addComponent(jLabelRating)
-                    .addComponent(jLabelCategory))
+                    .addComponent(jLabelCanBorrow))
                 .addGap(50, 50, 50)
                 .addGroup(jPanelMidLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jTextFieldAuthor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextFieldISBN, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextFieldCategory, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextFieldTitle, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jCheckBoxAvalible))
+                    .addComponent(jTextFieldFirstName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTextFieldLastName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTextFieldStudentNumber, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jCheckBoxCanBorrow))
                 .addGap(20, 20, 20))
         );
         jPanelMidLayout.setVerticalGroup(
@@ -145,24 +136,20 @@ public class CreateLearnerForm extends javax.swing.JFrame {
             .addGroup(jPanelMidLayout.createSequentialGroup()
                 .addGap(20, 20, 20)
                 .addGroup(jPanelMidLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabelTitle)
-                    .addComponent(jTextFieldTitle, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLabelStudentNumber)
+                    .addComponent(jTextFieldStudentNumber, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanelMidLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabelAuthor)
-                    .addComponent(jTextFieldAuthor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jTextFieldFirstName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanelMidLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabelISBN)
-                    .addComponent(jTextFieldISBN, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(jPanelMidLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextFieldCategory, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabelCategory))
-                .addGap(18, 18, 18)
+                    .addComponent(jLabelLastName)
+                    .addComponent(jTextFieldLastName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(20, 20, 20)
                 .addGroup(jPanelMidLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabelRating)
-                    .addComponent(jCheckBoxAvalible))
+                    .addComponent(jLabelCanBorrow)
+                    .addComponent(jCheckBoxCanBorrow))
                 .addGap(20, 20, 20))
         );
 
@@ -213,7 +200,7 @@ public class CreateLearnerForm extends javax.swing.JFrame {
         jLabel3.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(0, 0, 0));
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel3.setText("Create Book:");
+        jLabel3.setText("Create Learner:");
 
         javax.swing.GroupLayout jPanelTopLayout = new javax.swing.GroupLayout(jPanelTop);
         jPanelTop.setLayout(jPanelTopLayout);
@@ -265,36 +252,43 @@ public class CreateLearnerForm extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jTextFieldAuthorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldAuthorActionPerformed
+    private void jTextFieldFirstNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldFirstNameActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextFieldAuthorActionPerformed
+    }//GEN-LAST:event_jTextFieldFirstNameActionPerformed
 
-    private void jTextFieldISBNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldISBNActionPerformed
+    private void jTextFieldLastNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldLastNameActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextFieldISBNActionPerformed
+    }//GEN-LAST:event_jTextFieldLastNameActionPerformed
 
     private void jButtonSubmitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSubmitActionPerformed
         //JButtonSubmitActionPerformed method with parameters : ActionEvent evt
         //JButtonSubmitActionPerformed method with signature : void jButtonSubmitActionPerformed(java.awt.event.ActionEvent evt)
-        //create a new Book object and saves the values from the text fields to the object and saves the object to the databasep
-    //    Create create = new Create();
-      //  create.createBook(jTextFieldTitle.getText(), jTextFieldSubTitle.getText(), jTextFieldAuthor.getText(), jTextFieldISBN.getText(), jTextFieldDescription.getText(), jTextFieldRating.getText(), jTextFieldImageLink.getText());
-     // public Book(String ISBN, String title, String author, String category, boolean availableForLoan) {
-        Message message = new Message();
+        //create a new Learner object and saves the values from the text fields to the object and saves the object to the databasep
+    ////     public Learner(int studentNumber, String firstName, String lastName,  boolean canBorrow) {
+       Message message = new Message();
 
         Message responseMessage = new Message();
-        Book book = new Book(Integer.parseInt(jTextFieldISBN.getText()), jTextFieldTitle.getText(), jTextFieldAuthor.getText(),  jTextFieldCategory.getText(), jCheckBoxAvalible .isSelected());
-       
+        message.setText("CREATE_LEARNER");
         responseMessage = guiClientApp.sendMessageData(message);
-        System.out.println("Response message: " + responseMessage.getText());
+        System.out.println("responseMessage.getText() = " + responseMessage.getText());
+        //public User(String userId, String firstName, String lastName, String userName, String email, String password, String accessLevel) {
+        Learner learner = new Learner(Integer.parseInt(jTextFieldStudentNumber.getText()), jTextFieldFirstName.getText(), jTextFieldLastName.getText(), true);
+        Learner LearnerFromDatabase = new Learner();
+        LearnerFromDatabase = (Learner) guiClientApp.sendObjectData(learner);
+        
+        //send learner object to server
 
-        Book bookFromDatabase = (Book) guiClientApp.sendObjectData(book);
-        System.out.println("Book from database: " + bookFromDatabase.toString());
-        if (bookFromDatabase != null) {
-            JOptionPane.showMessageDialog(null, "Book added to database");
+        if (LearnerFromDatabase != null) {
+            JOptionPane.showMessageDialog(this, "Learner created successfully");
+            this.setVisible(false);
+            this.dispose();
         } else {
-            JOptionPane.showMessageDialog(null, "Book not added to database");
+            JOptionPane.showMessageDialog(this, "Learner creation failed");
         }
+
+
+
+
 
 
     }//GEN-LAST:event_jButtonSubmitActionPerformed
@@ -307,13 +301,13 @@ public class CreateLearnerForm extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_jButtonCancelActionPerformed
 
-    private void jCheckBoxAvalibleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBoxAvalibleActionPerformed
+    private void jCheckBoxCanBorrowActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBoxCanBorrowActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jCheckBoxAvalibleActionPerformed
+    }//GEN-LAST:event_jCheckBoxCanBorrowActionPerformed
 
-    private void jTextFieldCategoryActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldCategoryActionPerformed
+    private void jTextFieldStudentNumberActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldStudentNumberActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextFieldCategoryActionPerformed
+    }//GEN-LAST:event_jTextFieldStudentNumberActionPerformed
 
     /**
      * @param args the command line arguments
@@ -382,20 +376,18 @@ public class CreateLearnerForm extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonCancel;
     private javax.swing.JButton jButtonSubmit;
-    private javax.swing.JCheckBox jCheckBoxAvalible;
+    private javax.swing.JCheckBox jCheckBoxCanBorrow;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabelAuthor;
-    private javax.swing.JLabel jLabelCategory;
-    private javax.swing.JLabel jLabelISBN;
-    private javax.swing.JLabel jLabelRating;
-    private javax.swing.JLabel jLabelTitle;
+    private javax.swing.JLabel jLabelCanBorrow;
+    private javax.swing.JLabel jLabelLastName;
+    private javax.swing.JLabel jLabelStudentNumber;
     private javax.swing.JPanel jPanelBottom;
     private javax.swing.JPanel jPanelMain;
     private javax.swing.JPanel jPanelMid;
     private javax.swing.JPanel jPanelTop;
-    private javax.swing.JTextField jTextFieldAuthor;
-    private javax.swing.JTextField jTextFieldCategory;
-    private javax.swing.JTextField jTextFieldISBN;
-    private javax.swing.JTextField jTextFieldTitle;
+    private javax.swing.JTextField jTextFieldFirstName;
+    private javax.swing.JTextField jTextFieldLastName;
+    private javax.swing.JTextField jTextFieldStudentNumber;
     // End of variables declaration//GEN-END:variables
 }

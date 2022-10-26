@@ -5,16 +5,12 @@
 package za.co.nemesisnet.supreme.invention.ClientPackages.view;
 
 import java.awt.Image;
-import java.lang.module.Configuration;
+
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
 
-
-import za.co.nemesisnet.supreme.invention.model.Book;
-import za.co.nemesisnet.supreme.invention.model.Dates;
-import za.co.nemesisnet.supreme.invention.model.Loan;
-import za.co.nemesisnet.supreme.invention.model.User;
+import za.co.nemesisnet.supreme.invention.model.*;
 
 /**
  *
@@ -25,6 +21,9 @@ public class BookingForm extends javax.swing.JFrame {
     Book book = null;
     User user = null;
     Dates dates = new Dates();
+    Learner learner = null;
+    GuiClientApp guiClientApp = null;
+
 
     /**
      * Creates new form bookingForm
@@ -34,13 +33,15 @@ public class BookingForm extends javax.swing.JFrame {
         initComponents();
     }
 
-    public BookingForm(User user, Book book) {
+    public BookingForm(User user, Learner learner, Book book,GuiClientApp guiClientApp) {
         this.book = book;
         this.user = user;
+        this.learner = learner;
+        this.guiClientApp = guiClientApp;
         setTitle("Ubiquitous System" +" - " + "Loan Book"+" - "+ book.getTitle());
         initComponents();
         Dates dates = new Dates();
-        jTextFieldBookUserName.setText(user.getUserName());
+        jTextFieldBookUserName.setText(learner.getFirstName());
         jTextFieldBookTitle.setText(book.getTitle());
         jTextFieldDateOfIssue.setText(dates.getFormattedStartDate());
         jTextFieldDueDate.setText(dates.getFormattedEndDate());
@@ -270,11 +271,33 @@ public class BookingForm extends javax.swing.JFrame {
 
     private void jButtonConfimActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonConfimActionPerformed
         // TODO add your handling code here:
-        this.setVisible(false);
-        //new RegisterUserForm().setVisible(rootPaneCheckingEnabled);
-        JOptionPane.showMessageDialog(this, user.getUserName() + ", You Have booked out " + book.getTitle() + ".\n Please return it by the due date of " + dates.getFormattedEndDate() + ".", "Ubiquitous System - Bookings ", JOptionPane.INFORMATION_MESSAGE);
 
-        Loan loan = new Loan(user, book);
+        //new RegisterUserForm().setVisible(rootPaneCheckingEnabled);
+        JOptionPane.showMessageDialog(this, learner.getFirstName() +" " + learner.getLastName() + ", Has booked out " + book.getTitle() + ".\n Please return it by the due date of " + dates.getFormattedEndDate() + ".", "Ubiquitous System - Bookings ", JOptionPane.INFORMATION_MESSAGE);
+        //public Loan(int loanNumber, int studentNumber, String ISBN, String dateBorrowed, String dateReturned , String penalty) {
+        Loan loan = new Loan(0, learner.getStudentNumber(), book.getISBN(), dates.getFormattedStartDate(), dates.getFormattedEndDate(), "0");
+        Loan loanFromDB = new Loan();
+        Message message = new Message();
+        Message response = new Message();
+
+        message.setText("CREATE_LOAN");
+        response = guiClientApp.sendMessageData(message);
+        System.out.println("Response from server: " + response.getText());
+
+        loanFromDB = (Loan) guiClientApp.sendObjectData(loan);
+        System.out.println("Loan from server: " + loanFromDB.getLoanNumber());
+        //joption pane showing success and the loan number and the due date
+        JOptionPane.showMessageDialog(this, "Loan number: " + loanFromDB.getLoanNumber() + " due date: " + loanFromDB.getDateReturned(), " System - Bookings ", JOptionPane.INFORMATION_MESSAGE);
+
+        this.setVisible(false);
+
+
+
+
+
+       // Loan loan = new Loan(learner, book);
+
+//        Loan loan = new Loan(user, book);
 
      //   Create create = new Create();
 

@@ -281,6 +281,7 @@ public class CreateBookForm extends javax.swing.JFrame {
       //  create.createBook(jTextFieldTitle.getText(), jTextFieldSubTitle.getText(), jTextFieldAuthor.getText(), jTextFieldISBN.getText(), jTextFieldDescription.getText(), jTextFieldRating.getText(), jTextFieldImageLink.getText());
      // public Book(String ISBN, String title, String author, String category, boolean availableForLoan) {
         Message message = new Message();
+        message.setText("CREATE_BOOK");
 
         Message responseMessage = new Message();
         Book book = new Book(jTextFieldISBN.getText(), jTextFieldTitle.getText(), jTextFieldAuthor.getText(),  jTextFieldCategory.getText(), jCheckBoxAvalible .isSelected());
@@ -288,9 +289,12 @@ public class CreateBookForm extends javax.swing.JFrame {
         System.out.println("Response message: " + responseMessage.getText());
 
         Book bookFromDatabase = (Book) guiClientApp.sendObjectData(book);
-        System.out.println("Book from database: " + bookFromDatabase.toString());
+    
         if (bookFromDatabase != null) {
+                System.out.println("Book from database: " + bookFromDatabase.toString());
             JOptionPane.showMessageDialog(null, "Book added to database");
+            this.setVisible(false);
+            this.dispose();
         } else {
             JOptionPane.showMessageDialog(null, "Book not added to database");
         }

@@ -13,11 +13,7 @@ import javax.swing.SwingUtilities;
 import javax.swing.table.DefaultTableModel;
 
 
-
-import za.co.nemesisnet.supreme.invention.model.Book;
-import za.co.nemesisnet.supreme.invention.model.Message;
-
-import za.co.nemesisnet.supreme.invention.model.User;
+import za.co.nemesisnet.supreme.invention.model.*;
 
 /**
  *
@@ -26,10 +22,15 @@ import za.co.nemesisnet.supreme.invention.model.User;
 public class BookshelfDisplay extends javax.swing.JFrame {
  
     ArrayList<Book> bookList;
+    ArrayList<User> userList;
+    ArrayList<Message> messageList;
+    ArrayList<Loan> loanList = new ArrayList<Loan>();
+
     User user;
     Message responseMessageObject;
     Object responseDataObject;
 
+    GuiClientApp guiClientApp;
     /**
      * Creates new form UserListForm
      */
@@ -41,6 +42,7 @@ public class BookshelfDisplay extends javax.swing.JFrame {
     public BookshelfDisplay(User user, ArrayList<Book> bookList,GuiClientApp guiClientApp) {
         setTitle("Client System" +" - " + "Bookshelf" );
         initComponents();
+        this.guiClientApp = guiClientApp;
         this.bookList = bookList;
         this.user = user;
 //        Message message  = new Message("LISTALLBOOKS");
@@ -51,20 +53,21 @@ public class BookshelfDisplay extends javax.swing.JFrame {
         
         //loop though list to populate table
         // this.userList = userList;
-        Object[][] data = new Object[bookList.size()][6];
+        Object[][] data = new Object[bookList.size()][5];
         for (int i = 0; i < bookList.size(); i++) {
 
         //    data[i][0] = bookList.get(i).getBookId();
             // data[i][0] = i;
+            data[i][0] = bookList.get(i).getISBN();
             data[i][1] = bookList.get(i).getTitle();
-            data[i][2] = bookList.get(i).getSubTitle();
-            data[i][3] = bookList.get(i).getAuthors();
-            data[i][4] = bookList.get(i).getDescription();
+            data[i][2] = bookList.get(i).getAuthors();
+            data[i][3] = bookList.get(i).getCategory();
+            data[i][4] = bookList.get(i).isAvailableForLoan();
      //       data[i][5] = bookList.get(i).getRating();
 
         }
 
-        Object[] columnNames = {"Number : ", "Title : ", "Sub-Title : ", "Author : ", "Description : ", "Rating : "};
+        Object[] columnNames = {"ISBN : ", "Title : ", "Author : ", "Category : ", "Available : "};
         DefaultTableModel model = new DefaultTableModel(data, columnNames) {
 
             @Override
@@ -97,11 +100,11 @@ public class BookshelfDisplay extends javax.swing.JFrame {
         jMenuFile = new javax.swing.JMenu();
         jMenuItemNewLoan = new javax.swing.JMenuItem();
         jMenuEdit = new javax.swing.JMenu();
-        jMenuItemUserProfile = new javax.swing.JMenuItem();
-        jMenuItemCRUD = new javax.swing.JMenuItem();
-        jMenuSettings = new javax.swing.JMenu();
-        jMenuItemConnectivity = new javax.swing.JMenuItem();
-        jMenuItemCompanyProfile = new javax.swing.JMenuItem();
+        jMenuItemAddLearner = new javax.swing.JMenuItem();
+        jMenuItemAddBook = new javax.swing.JMenuItem();
+        jMenuEdit1 = new javax.swing.JMenu();
+        jMenuItemLoanList = new javax.swing.JMenuItem();
+        jMenuItemBookList = new javax.swing.JMenuItem();
         jMenuHelp = new javax.swing.JMenu();
         jMenuItemAbout = new javax.swing.JMenuItem();
         jMenuItemHelpWiki = new javax.swing.JMenuItem();
@@ -262,54 +265,54 @@ public class BookshelfDisplay extends javax.swing.JFrame {
         jMenuBar1.add(jMenuFile);
 
         jMenuEdit.setMnemonic('e');
-        jMenuEdit.setText("Edit");
+        jMenuEdit.setText("Crud");
 
-        jMenuItemUserProfile.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_U, 0));
-        jMenuItemUserProfile.setMnemonic('u');
-        jMenuItemUserProfile.setText("User Profile");
-        jMenuItemUserProfile.addActionListener(new java.awt.event.ActionListener() {
+        jMenuItemAddLearner.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_U, 0));
+        jMenuItemAddLearner.setMnemonic('u');
+        jMenuItemAddLearner.setText("Add Learner");
+        jMenuItemAddLearner.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItemUserProfileActionPerformed(evt);
+                jMenuItemAddLearnerActionPerformed(evt);
             }
         });
-        jMenuEdit.add(jMenuItemUserProfile);
+        jMenuEdit.add(jMenuItemAddLearner);
 
-        jMenuItemCRUD.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_C, 0));
-        jMenuItemCRUD.setMnemonic('c');
-        jMenuItemCRUD.setText("CRUD");
-        jMenuItemCRUD.addActionListener(new java.awt.event.ActionListener() {
+        jMenuItemAddBook.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_B, 0));
+        jMenuItemAddBook.setMnemonic('c');
+        jMenuItemAddBook.setText("Add Book");
+        jMenuItemAddBook.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItemCRUDActionPerformed(evt);
+                jMenuItemAddBookActionPerformed(evt);
             }
         });
-        jMenuEdit.add(jMenuItemCRUD);
+        jMenuEdit.add(jMenuItemAddBook);
 
         jMenuBar1.add(jMenuEdit);
 
-        jMenuSettings.setMnemonic('s');
-        jMenuSettings.setText("Settings");
+        jMenuEdit1.setMnemonic('e');
+        jMenuEdit1.setText("Lists");
 
-        jMenuItemConnectivity.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_C, 0));
-        jMenuItemConnectivity.setMnemonic('c');
-        jMenuItemConnectivity.setText("Connectivity");
-        jMenuItemConnectivity.addActionListener(new java.awt.event.ActionListener() {
+        jMenuItemLoanList.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_U, 0));
+        jMenuItemLoanList.setMnemonic('u');
+        jMenuItemLoanList.setText("List Loans");
+        jMenuItemLoanList.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItemConnectivityActionPerformed(evt);
+                jMenuItemLoanListActionPerformed(evt);
             }
         });
-        jMenuSettings.add(jMenuItemConnectivity);
+        jMenuEdit1.add(jMenuItemLoanList);
 
-        jMenuItemCompanyProfile.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_P, 0));
-        jMenuItemCompanyProfile.setMnemonic('P');
-        jMenuItemCompanyProfile.setText("Company Profile");
-        jMenuItemCompanyProfile.addActionListener(new java.awt.event.ActionListener() {
+        jMenuItemBookList.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_B, 0));
+        jMenuItemBookList.setMnemonic('c');
+        jMenuItemBookList.setText("List Books");
+        jMenuItemBookList.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItemCompanyProfileActionPerformed(evt);
+                jMenuItemBookListActionPerformed(evt);
             }
         });
-        jMenuSettings.add(jMenuItemCompanyProfile);
+        jMenuEdit1.add(jMenuItemBookList);
 
-        jMenuBar1.add(jMenuSettings);
+        jMenuBar1.add(jMenuEdit1);
 
         jMenuHelp.setMnemonic('h');
         jMenuHelp.setText("Help");
@@ -372,49 +375,19 @@ public class BookshelfDisplay extends javax.swing.JFrame {
             Book book = bookList.get(jTable1.getSelectedRow());//book
 
             String userId = user.getUserId();
-    //        String bookId = String.valueOf(book.getBookId());///get the loan of this book to compare with this users
 
-       //     Loan lastLoan = read.readLatestLoanByBookId(book);
-          //  if (lastLoan.getReturnedDate().equalsIgnoreCase("0-0-0")) {
-     //           if (lastLoan.getUserId().equalsIgnoreCase(userId)) {
-     //               button ="returns";                   
-     //           }
-   //             System.out.println("Not alavlible , a user cutrently has this book");
-  //              System.out.println("This is the return due date : " +lastLoan.getReturnedDate());
-  //              System.out.println("Currnetly out on loan with User id : " +lastLoan.getUserId());
-  //          } else {
- //               System.out.println("Book avalible to loan");
-  //              button = "loan";
-  //          }
-
-           
-
-       //     System.out.println("Current Book id : " +book.getBookId());
-            System.out.println("Currnet User id : " +user.getUserId());
+            System.out.println("Current User id : " +user.getUserId());
             
 
             System.out.println("Button is set to : "+button);
+            //learner list
+            
 
             DisplayBookForm displayBookForm = new DisplayBookForm(user, bookList.get(jTable1.getSelectedRow()), button);// means display loan buton
         }
 
 
     }//GEN-LAST:event_jTable1MouseClicked
-
-    private void jMenuItemConnectivityActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemConnectivityActionPerformed
-        // TODO add your handling code here:
-//        SystemSettingsConectionsForm systemSettingsConectionsForm = new SystemSettingsConectionsForm();
- //       systemSettingsConectionsForm.setVisible(rootPaneCheckingEnabled);
-        // systemSettingsConectionsForm.setAlwaysOnTop(rootPaneCheckingEnabled);
-
-    }//GEN-LAST:event_jMenuItemConnectivityActionPerformed
-
-    private void jMenuItemCompanyProfileActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemCompanyProfileActionPerformed
-        // TODO add your handling code here:
-//        SystemSettingsCompanyProfileForm systemSettingsCompanyProfileForm = new SystemSettingsCompanyProfileForm();
-//        systemSettingsCompanyProfileForm.setVisible(rootPaneCheckingEnabled);
-        // systemSettingsCompanyProfileForm.setAlwaysOnTop(rootPaneCheckingEnabled);
-    }//GEN-LAST:event_jMenuItemCompanyProfileActionPerformed
 
     private void jMenuItemAboutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemAboutActionPerformed
         // TODO add your handling code here:
@@ -424,27 +397,19 @@ public class BookshelfDisplay extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jMenuItemHelpWikiActionPerformed
 
-    private void jMenuItemUserProfileActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemUserProfileActionPerformed
+    private void jMenuItemAddLearnerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemAddLearnerActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jMenuItemUserProfileActionPerformed
-
-    private void jMenuItemCRUDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemCRUDActionPerformed
-        // TODO add your handling code here:
-        int userAccessLevel = Integer.valueOf(user.getAccessLevel());
-        if (userAccessLevel>0) {
- //       CRUDGui cRUDGui = new CRUDGui();
- //       cRUDGui.setVisible(rootPaneCheckingEnabled);
- //       cRUDGui.setAutoRequestFocus(true);
-        }
-        else
-        {
-        JOptionPane.showMessageDialog(new JFrame(), "Error!  \n \n " + "you Do not have sufficent privliages to acces this menu! \n  Please contact the system admin for assistance!", "Ubiquitous System - UAC ", JOptionPane.INFORMATION_MESSAGE);
-        }
+        CreateLearnerForm createLearnerForm = new CreateLearnerForm(guiClientApp);
+        createLearnerForm.setVisible(true);
         
-        //  cRUDGui.set
-        // this.setVisible(true);
-        // this.dispose();
-    }//GEN-LAST:event_jMenuItemCRUDActionPerformed
+    }//GEN-LAST:event_jMenuItemAddLearnerActionPerformed
+
+    private void jMenuItemAddBookActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemAddBookActionPerformed
+        // TODO add your handling code here:
+        CreateBookForm createBookForm = new CreateBookForm(guiClientApp);
+        createBookForm.setVisible(true);
+        
+    }//GEN-LAST:event_jMenuItemAddBookActionPerformed
 
     private void jMenuItemNewLoanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemNewLoanActionPerformed
         // TODO add your handling code here:
@@ -453,6 +418,49 @@ public class BookshelfDisplay extends javax.swing.JFrame {
 //        BookingForm bookingForm = new BookingForm(user, read.loanBookByTitle());
 //        bookingForm.setVisible(true);
 //        bookingForm.setAutoRequestFocus(true);
+          //prompt for studentnumber joptionpane that will be used to create a new loan via booking form
+        //promt for book isbn
+        //create new loan
+            String studentNumber = JOptionPane.showInputDialog("Enter Student Number");
+            //send student number to server
+        Message message  = new Message();
+        Message response = new Message();
+        message.setText("FIND_LEARNER");
+        response = guiClientApp.sendMessageData(message);
+        System.out.println("Response from server : "+response.getText());
+        Learner learner = new Learner();
+        Learner learnerFromDatabase = new Learner();
+        learner.setStudentNumber(Integer.parseInt(studentNumber));
+        learnerFromDatabase = (Learner) guiClientApp.sendObjectData(learner);
+        System.out.println("Learner from database : "+learnerFromDatabase.getStudentNumber());
+        //send book isbn to server
+        String bookIsbn = JOptionPane.showInputDialog("Enter Book ISBN");
+        message = new Message();
+        message.setText("FIND_BOOK");
+        response = guiClientApp.sendMessageData(message);
+        System.out.println("Response from server : "+response.getText());
+        Book book = new Book();
+        book.setISBN(bookIsbn);
+        Book bookFromDatabase = new Book();
+        bookFromDatabase = (Book) guiClientApp.sendObjectData(book);
+        System.out.println("Book from database : "+bookFromDatabase.getISBN());
+        //joptiopane to dispay both learner and book
+        JOptionPane.showMessageDialog(null, "Learner : "+learnerFromDatabase.getStudentNumber()+"\nBook : "+bookFromDatabase.getISBN());
+
+
+        //create new loan
+        BookingForm bookingForm = new BookingForm(user, learnerFromDatabase, bookFromDatabase , guiClientApp);
+        bookingForm.setVisible(true);
+
+
+        //send learner to server
+
+
+
+
+
+
+
 
 
     }//GEN-LAST:event_jMenuItemNewLoanActionPerformed
@@ -476,6 +484,34 @@ public class BookshelfDisplay extends javax.swing.JFrame {
     private void formMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseEntered
         // TODO add your handling code here:
     }//GEN-LAST:event_formMouseEntered
+
+    private void jMenuItemLoanListActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemLoanListActionPerformed
+        // TODO add your handling code here:
+        Message message = new Message();
+        message.setText("LIST_ALL_LOANS");
+        Message response = guiClientApp.sendMessageData(message);
+
+        System.out.println("Response from server : " + response.getText());
+           ArrayList<Loan> loanListFromDatabase = new ArrayList<Loan>();
+        loanListFromDatabase  = (ArrayList<Loan>) guiClientApp.sendObjectData(loanList);
+        System.out.println("Loan list from database : " + loanListFromDatabase);
+        if (loanListFromDatabase != null) {
+            LoanListDisplay loanListDisplay = new LoanListDisplay(guiClientApp,loanListFromDatabase);
+            loanListDisplay.setVisible(true);
+        } else {
+            JOptionPane.showMessageDialog(null, "No loans found");
+        }
+
+
+
+        
+        
+        
+    }//GEN-LAST:event_jMenuItemLoanListActionPerformed
+
+    private void jMenuItemBookListActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemBookListActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jMenuItemBookListActionPerformed
 
     /**
      * @param args the command line arguments
@@ -568,16 +604,16 @@ public class BookshelfDisplay extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenu jMenuEdit;
+    private javax.swing.JMenu jMenuEdit1;
     private javax.swing.JMenu jMenuFile;
     private javax.swing.JMenu jMenuHelp;
     private javax.swing.JMenuItem jMenuItemAbout;
-    private javax.swing.JMenuItem jMenuItemCRUD;
-    private javax.swing.JMenuItem jMenuItemCompanyProfile;
-    private javax.swing.JMenuItem jMenuItemConnectivity;
+    private javax.swing.JMenuItem jMenuItemAddBook;
+    private javax.swing.JMenuItem jMenuItemAddLearner;
+    private javax.swing.JMenuItem jMenuItemBookList;
     private javax.swing.JMenuItem jMenuItemHelpWiki;
+    private javax.swing.JMenuItem jMenuItemLoanList;
     private javax.swing.JMenuItem jMenuItemNewLoan;
-    private javax.swing.JMenuItem jMenuItemUserProfile;
-    private javax.swing.JMenu jMenuSettings;
     private javax.swing.JPanel jPanelBottom;
     private javax.swing.JPanel jPanelMain;
     private javax.swing.JPanel jPanelMid3;
